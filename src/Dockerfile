@@ -41,7 +41,7 @@ ADD erlang-18.1-1.el7.centos.x86_64.rpm /tmp/erlang-18.1-1.el7.centos.x86_64.rpm
 ADD rabbitmq-server-3.6.1-1.noarch.rpm /tmp/rabbitmq-server-3.6.1-1.noarch.rpm
 RUN rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 RUN cd /tmp && yum install -y erlang-18.1-1.el7.centos.x86_64.rpm && yum install -y rabbitmq-server-3.6.1-1.noarch.rpm
-RUM rm -f erlang-18.1-1.el7.centos.x86_64.rpm & RUM rm -f rabbitmq-server-3.6.1-1.noarch.rpm
+RUN rm -f erlang-18.1-1.el7.centos.x86_64.rpm & RUM rm -f rabbitmq-server-3.6.1-1.noarch.rpm
 
 # install zhihu_spider requirements
 RUN pip install -r requirements.txt -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
