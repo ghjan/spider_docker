@@ -1,9 +1,9 @@
 # zhihu_spider
-# version 0.0.1
+# version 0.0.2
 
 FROM centos
 
-MAINTAINER "ruoyu.liu" <lrysjtu@gmail.com>
+MAINTAINER "David Zhang" <davidzhang330@gmail.com>
 
 # install Chinese support
 # RUN yum -y groupinstall chinese-support
@@ -28,17 +28,16 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 RUN wget https://bootstrap.pypa.io/get-pip.py;python get-pip.py;rm -f get-pip.py
 
 # install mongodb
-RUN rpm --import https://www.mongodb.org/static/pgp/server-3.2.asc
-ADD mongodb-enterprise.repo /etc/yum.repos.d/mongodb-enterprise.repo 
-RUN yum install -y mongodb-enterprise
+COPY mongodb-org-3.4.repo /etc/yum.repos.d/mongodb-org-3.4.repo
+RUN yum install -y mongodb-org
 # you need map a directory to /data/db to start mongod
 
 # install rabbitmq
 # its too slow to download while building
 #RUN wget http://www.rabbitmq.com/releases/erlang/erlang-18.1-1.el7.centos.x86_64.rpm
 #RUN wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.1/rabbitmq-server-3.6.1-1.noarch.rpm
-ADD erlang-18.1-1.el7.centos.x86_64.rpm /tmp/erlang-18.1-1.el7.centos.x86_64.rpm
-ADD rabbitmq-server-3.6.1-1.noarch.rpm /tmp/rabbitmq-server-3.6.1-1.noarch.rpm
+COPY erlang-18.1-1.el7.centos.x86_64.rpm /tmp/erlang-18.1-1.el7.centos.x86_64.rpm
+COPY rabbitmq-server-3.6.1-1.noarch.rpm /tmp/rabbitmq-server-3.6.1-1.noarch.rpm
 RUN rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 RUN cd /tmp && yum install -y erlang-18.1-1.el7.centos.x86_64.rpm && yum install -y rabbitmq-server-3.6.1-1.noarch.rpm
 RUN rm -f erlang-18.1-1.el7.centos.x86_64.rpm & RUM rm -f rabbitmq-server-3.6.1-1.noarch.rpm
