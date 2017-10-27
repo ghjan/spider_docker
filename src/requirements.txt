@@ -1,0 +1,5 @@
+wheel
+Scrapy
+pymongo
+requests
+celery
